@@ -4,8 +4,16 @@
 
 const BrowserWindow = require('electron').BrowserWindow;
 
+// TODO: handle nested records (e.g. webPreferences)
 function browserWindowOptionsFrom(options) {
-  return {}; // TODO
+  var rec = {}
+  var len = options.length
+  for(var idx = 0; idx < len; idx++) {
+    var k = camelCaseConstructorNameFor(options[idx])
+    var v = options[idx].value0
+    rec[k] = v
+  }
+  return rec;
 }
 
 exports.newBrowserWindow = function(options) {
@@ -32,4 +40,10 @@ exports.loadURL = function(browserWindow) {
       return browserWindow.loadURL(url);
     };
   };
+}
+
+// TODO: code duplication
+function camelCaseConstructorNameFor(value) {
+  const ctorName = value.constructor.name;
+  return ctorName[0].toLowerCase() + ctorName.substring(1);
 }
