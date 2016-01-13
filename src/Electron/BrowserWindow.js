@@ -3,7 +3,7 @@
 // module Electron.BrowserWindow
 
 exports.newBrowserWindowImpl = function(options) {
-  const BrowserWindow = require('electron').BrowserWindow;
+  var BrowserWindow = require('electron').BrowserWindow;
   return function() {
     return new BrowserWindow(options);
   };
