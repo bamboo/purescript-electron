@@ -1,0 +1,8 @@
+anguage: node_js
+node_js:
+  - 5
+install:
+  - npm install bower -g
+  - npm install
+script:
+  - npm test
