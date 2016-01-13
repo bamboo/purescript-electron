@@ -20,7 +20,9 @@ main :: forall eff. Eff (console :: CONSOLE, process :: Process | eff) Unit
 main = run [consoleReporter] do
   describe "encodeOptions :: BrowserWindowOptions -> Json" do
     it "can encode all options" do
-      let options = [Width 640, Height 480]
+      let options = [Width 640, Height 480, WebPreferences [OverlayScrollbars true]]
       encodeOptions options `shouldEqual` (  "width"  := 640
                                           ~> "height" := 480
+                                          ~> "webPreferences" := ( "overlayScrollbars" := true
+                                                                 ~> jsonEmptyObject )
                                           ~> jsonEmptyObject )

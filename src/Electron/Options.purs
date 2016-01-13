@@ -13,14 +13,18 @@ import Data.String
 import Data.StrMap as M
 
 encodeOptions :: forall a. (Generic a) => Array a -> Json
-encodeOptions = foldl insertOption M.empty >>> encodeJson 
+encodeOptions = map toSpine >>> encodeOptions'
+
+encodeOptions' :: Array GenericSpine -> Json
+encodeOptions' = foldl insertOption M.empty >>> encodeJson
   where
     insertOption strMap option =
-      case toSpine option of
+      case option of
         SProd qname [arg] -> M.insert (encodeKey qname) (encodeValue (arg unit)) strMap
         _                 -> strMap
     encodeKey = simpleName >>> toCamelCase
-    encodeValue = gEncodeJson'
+    encodeValue (SArray options) = map ((#) unit) options # encodeOptions'
+    encodeValue value = gEncodeJson' value
 
 toCamelCase :: String -> String
 toCamelCase s = toLower (take 1 s) ++ drop 1 s

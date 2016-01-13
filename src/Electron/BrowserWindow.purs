@@ -1,5 +1,6 @@
 module Electron.BrowserWindow
   ( BrowserWindowOption(..)
+  , WebPreference(..)
   , BrowserWindowOptions(..)
   , BrowserWindow()
   , newBrowserWindow
@@ -21,8 +22,17 @@ import Electron.Options
 data BrowserWindowOption
   = Width Int
   | Height Int
+  | WebPreferences (Array WebPreference)
+
+data WebPreference
+  = ZoomFactor Number
+  | AllowDisplayingInsecureContent Boolean
+  | AllowRunningInsecureContent Boolean
+  | OverlayScrollbars Boolean
 
 derive instance genericBrowserWindowOption :: Generic BrowserWindowOption
+
+derive instance genericWebPreference :: Generic WebPreference
 
 type BrowserWindowOptions = Array BrowserWindowOption
 
