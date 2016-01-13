@@ -3,6 +3,7 @@
 // module Electron.BrowserWindow
 
 exports.newBrowserWindowImpl = function(options) {
+  // require('electron') on demand so test suites can still run under node
   var BrowserWindow = require('electron').BrowserWindow;
   return function() {
     return new BrowserWindow(options);
