@@ -54,9 +54,9 @@ foreign import loadURL
   -> String
   -> Eff (electron :: ELECTRON | eff) Unit
 
-onClose :: forall callbackEff eff
+onClose :: forall eff
    . BrowserWindow
-  -> Eff callbackEff Unit
+  -> Eff (electron :: ELECTRON | eff) Unit
   -> Eff (electron :: ELECTRON | eff) Unit
 onClose browserWindow callback = onCloseImpl unsafePerformEff browserWindow callback
 

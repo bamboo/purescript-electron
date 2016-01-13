@@ -24,8 +24,8 @@ data Path
   | Documents
   | AppData
 
-onReady :: forall callbackEff eff
-   . Eff callbackEff Unit
+onReady :: forall eff
+   . Eff (electron :: ELECTRON | eff) Unit
   -> Eff (electron :: ELECTRON | eff) Unit
 onReady callback = onReadyImpl unsafePerformEff callback
 
