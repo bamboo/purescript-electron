@@ -18,13 +18,11 @@ exports.quit = function() {
   return app.quit();
 }
 
-exports.onReadyImpl = function(unsafePerformEff) {
-  return function(callback) {
-    return function() {
-      return app.on('ready', function() {
-        unsafePerformEff(callback);
-      });
-    };
+exports.onReady = function(callback) {
+  return function() {
+    return app.on('ready', function() {
+      callback();
+    });
   };
 }
 

@@ -11,7 +11,6 @@ module Electron.BrowserWindow
 import Prelude
 
 import Control.Monad.Eff
-import Control.Monad.Eff.Unsafe
 
 import Data.Argonaut.Core (Json())
 import Data.Generic
@@ -24,6 +23,8 @@ data BrowserWindowOption
   | Height Int
   | WebPreferences (Array WebPreference)
 
+type BrowserWindowOptions = Array BrowserWindowOption
+
 data WebPreference
   = ZoomFactor Number
   | AllowDisplayingInsecureContent Boolean
@@ -34,8 +35,6 @@ derive instance genericBrowserWindowOption :: Generic BrowserWindowOption
 
 derive instance genericWebPreference :: Generic WebPreference
 
-type BrowserWindowOptions = Array BrowserWindowOption
-
 foreign import data BrowserWindow :: *
 
 newBrowserWindow :: forall eff
@@ -43,26 +42,16 @@ newBrowserWindow :: forall eff
   -> Eff (electron :: ELECTRON | eff) BrowserWindow
 newBrowserWindow = encodeOptions >>> newBrowserWindowImpl
 
-foreign import newBrowserWindowImpl
-  :: forall eff
+foreign import newBrowserWindowImpl :: forall eff
    . Json
   -> Eff (electron :: ELECTRON | eff) BrowserWindow
 
-foreign import loadURL
-  :: forall eff
+foreign import loadURL :: forall eff
    . BrowserWindow
   -> String
   -> Eff (electron :: ELECTRON | eff) Unit
 
-onClose :: forall eff
+foreign import onClose :: forall eff
    . BrowserWindow
   -> Eff (electron :: ELECTRON | eff) Unit
-  -> Eff (electron :: ELECTRON | eff) Unit
-onClose browserWindow callback = onCloseImpl unsafePerformEff browserWindow callback
-
-foreign import onCloseImpl
-  :: forall callbackEff eff
-   . (Eff callbackEff Unit -> Unit)
-  -> BrowserWindow
-  -> Eff callbackEff Unit
   -> Eff (electron :: ELECTRON | eff) Unit

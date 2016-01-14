@@ -10,14 +10,12 @@ exports.newBrowserWindowImpl = function(options) {
   };
 }
 
-exports.onCloseImpl = function(unsafePerformEff) {
-  return function(browserWindow) {
-    return function(callback) {
-      return function() {
-        return browserWindow.on('close', function() {
-          unsafePerformEff(callback);
-        });
-      };
+exports.onClose = function(browserWindow) {
+  return function(callback) {
+    return function() {
+      return browserWindow.on('close', function() {
+        callback();
+      });
     };
   };
 }

@@ -9,8 +9,6 @@ module Electron.App
 import Prelude
 
 import Control.Monad.Eff
-import Control.Monad.Eff.Unsafe
-
 import Electron.Eff
 
 foreign import getAppPath :: forall eff. Eff (electron :: ELECTRON | eff) String
@@ -24,13 +22,6 @@ data Path
   | Documents
   | AppData
 
-onReady :: forall eff
+foreign import onReady :: forall eff
    . Eff (electron :: ELECTRON | eff) Unit
-  -> Eff (electron :: ELECTRON | eff) Unit
-onReady callback = onReadyImpl unsafePerformEff callback
-
-foreign import onReadyImpl
-  :: forall callbackEff eff
-   . (Eff callbackEff Unit -> Unit)
-  -> Eff callbackEff Unit
   -> Eff (electron :: ELECTRON | eff) Unit
