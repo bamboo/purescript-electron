@@ -18,13 +18,14 @@ encodeOptions = map toSpine >>> encodeOptions'
 encodeOptions' :: Array GenericSpine -> Json
 encodeOptions' = foldl insertOption M.empty >>> encodeJson
   where
-    insertOption strMap option =
-      case option of
-        SProd qname [arg] -> M.insert (encodeKey qname) (encodeValue (arg unit)) strMap
-        _                 -> strMap
-    encodeKey = simpleName >>> toCamelCase
-    encodeValue (SArray options) = map ((#) unit) options # encodeOptions'
-    encodeValue value = gEncodeJson' value
+  insertOption strMap option =
+    case option of
+      SProd qname [arg] -> M.insert (encodeKey qname) (encodeValue (force arg)) strMap
+      _                 -> strMap
+  encodeKey = simpleName >>> toCamelCase
+  encodeValue (SArray options) = map force options # encodeOptions'
+  encodeValue value = gEncodeJson' value
+  force = (unit #)
 
 toCamelCase :: String -> String
 toCamelCase s = toLower (take 1 s) ++ drop 1 s
