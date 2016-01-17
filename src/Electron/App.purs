@@ -9,7 +9,7 @@ module Electron.App
 import Prelude
 
 import Control.Monad.Eff
-import Electron.Eff
+import Electron
 
 foreign import getAppPath :: forall eff. Eff (electron :: ELECTRON | eff) String
 

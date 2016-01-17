@@ -15,7 +15,7 @@ import Control.Monad.Eff
 import Data.Argonaut.Core (Json())
 import Data.Generic
 
-import Electron.Eff
+import Electron
 import Electron.Options
 
 data BrowserWindowOption
