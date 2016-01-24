@@ -54,3 +54,12 @@ exports.send = function(webContents) {
   }
 }
 
+exports.onDidFinishLoad = function(webContent) {
+  return function(callback) {
+    return function() {
+      return webContent.on('did-finish-load', function() {
+        callback();
+      });
+    };
+  };
+}

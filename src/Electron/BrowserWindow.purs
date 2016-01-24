@@ -12,6 +12,7 @@ module Electron.BrowserWindow
   , DevToolOption(..)
   , DevToolOptions(..)
   , send
+  , onDidFinishLoad
   ) where
 
 import Prelude
@@ -95,3 +96,7 @@ foreign import send :: forall a eff
   -> a
   -> Eff (electron :: ELECTRON | eff) Unit
 
+foreign import onDidFinishLoad :: forall eff
+   . WebContents
+  -> Eff (electron :: ELECTRON | eff) Unit
+  -> Eff (electron :: ELECTRON | eff) Unit
