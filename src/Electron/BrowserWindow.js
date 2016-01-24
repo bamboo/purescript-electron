@@ -27,3 +27,30 @@ exports.loadURL = function(browserWindow) {
     };
   };
 }
+
+exports.webContents = function(browserWindow) {
+  return function() {
+    return browserWindow.webContents;
+  };
+}
+
+exports.openDevToolsImpl = function(webContents) {
+  return function(options) {
+    return function() {
+      webContents.openDevTools(options);
+      return {};
+    };
+  };
+}
+
+exports.send = function(webContents) {
+  return function(channel) {
+    return function(arg) {
+      return function() {
+        webContents.send(channel, arg);
+        return {};
+      }
+    }
+  }
+}
+

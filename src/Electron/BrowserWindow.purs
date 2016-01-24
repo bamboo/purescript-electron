@@ -6,6 +6,12 @@ module Electron.BrowserWindow
   , newBrowserWindow
   , onClose
   , loadURL
+  , WebContents(..)
+  , webContents
+  , openDevTools
+  , DevToolOption(..)
+  , DevToolOptions(..)
+  , send
   ) where
 
 import Prelude
@@ -55,3 +61,37 @@ foreign import onClose :: forall eff
    . BrowserWindow
   -> Eff (electron :: ELECTRON | eff) Unit
   -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import data WebContents :: *
+
+foreign import webContents :: forall eff
+   . BrowserWindow
+  -> Eff (electron :: ELECTRON | eff) WebContents
+
+-- | Opens the devtools.
+-- |
+-- | [Official Electron documentation](http://electron.atom.io/docs/all/#webcontents-opendevtools-options)
+openDevTools :: forall eff
+   . WebContents
+  -> DevToolOptions
+  -> Eff (electron :: ELECTRON | eff) Unit
+openDevTools wc = encodeOptions >>> openDevToolsImpl wc
+
+foreign import openDevToolsImpl :: forall eff
+   . WebContents
+  -> Json
+  -> Eff (electron :: ELECTRON | eff) Unit
+
+data DevToolOption
+  = Detach Boolean
+
+type DevToolOptions = Array DevToolOption
+
+derive instance genericDevToolOption :: Generic DevToolOption
+
+foreign import send :: forall a eff
+   . WebContents
+  -> String
+  -> a
+  -> Eff (electron :: ELECTRON | eff) Unit
+
