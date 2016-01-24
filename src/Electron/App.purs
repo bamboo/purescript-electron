@@ -22,6 +22,9 @@ data Path
   | Documents
   | AppData
 
+-- | Emitted when Electron has finished initialization.
+-- |
+-- | [Official Electron documentation](http://electron.atom.io/docs/all/#event-39-ready-39)
 foreign import onReady :: forall eff
    . Eff (electron :: ELECTRON | eff) Unit
   -> Eff (electron :: ELECTRON | eff) Unit
