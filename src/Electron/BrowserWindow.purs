@@ -24,6 +24,7 @@ import Data.Generic
 
 import Electron
 import Electron.Options
+import Electron.Event
 
 data BrowserWindowOption
   = Width Int
@@ -99,4 +100,9 @@ foreign import send :: forall a eff
 foreign import onDidFinishLoad :: forall eff
    . WebContents
   -> Eff (electron :: ELECTRON | eff) Unit
+  -> Eff (electron :: ELECTRON | eff) Unit
+  
+foreign import onNewWindow :: forall eff
+   . WebContents
+  -> (Event -> String -> Eff (electron :: ELECTRON | eff) Unit)
   -> Eff (electron :: ELECTRON | eff) Unit
