@@ -1,12 +1,12 @@
 module Electron.Event
-  ( Event
+  ( Event()
   , preventDefault
   , stopPropagation
   ) where
 
-import Prelude (Unit)
-import Control.Monad.Eff (Eff)
-import Electron (ELECTRON)
+import Prelude (Unit())
+import Control.Monad.Eff (Eff())
+import Electron (ELECTRON())
 
 foreign import data Event :: *
 

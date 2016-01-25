@@ -6,9 +6,9 @@ module Electron.Shell
   , beep
   ) where
 
-import Prelude (Unit)
-import Control.Monad.Eff (Eff)
-import Electron (ELECTRON)
+import Prelude (Unit())
+import Control.Monad.Eff (Eff())
+import Electron (ELECTRON())
 
 -- | Show the given file in a file manager. If possible, select the file.
 foreign import showItemInFolder :: forall e. String -> Eff (electron :: ELECTRON | e) Unit

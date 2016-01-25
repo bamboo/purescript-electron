@@ -4,7 +4,6 @@ import Prelude
 
 import Control.Monad.Eff
 import Control.Monad.Eff.Console
-import Control.Monad.Aff
 
 import Data.Argonaut.Core
 import Data.Argonaut.Combinators
@@ -17,7 +16,6 @@ import Test.Spec.Runner
 import Electron
 import Electron.BrowserWindow
 import Electron.Options
-import Electron.Shell
 
 main :: forall eff. Eff (console :: CONSOLE, process :: Process, electron :: ELECTRON | eff) Unit
 main = run [consoleReporter] do
