@@ -6,10 +6,10 @@ module Electron.App
   , quit
   ) where
 
-import Prelude
+import Prelude (Unit)
 
-import Control.Monad.Eff
-import Electron
+import Control.Monad.Eff (Eff)
+import Electron (ELECTRON)
 
 foreign import getAppPath :: forall eff. Eff (electron :: ELECTRON | eff) String
 

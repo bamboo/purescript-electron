@@ -63,3 +63,13 @@ exports.onDidFinishLoad = function(webContent) {
     };
   };
 }
+
+exports.onNewWindow = function(webContents) {
+  return function(callback) {
+    return function() {
+      return webContents.on('new-window', function(e, url) {
+        callback(e)(url)();
+      });
+    };
+  };
+}
