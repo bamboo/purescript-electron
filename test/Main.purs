@@ -1,21 +1,21 @@
 module Test.Main where
 
-import Prelude
+import Prelude (Unit)
 
-import Control.Monad.Eff
-import Control.Monad.Eff.Console
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Console (CONSOLE)
 
-import Data.Argonaut.Core
-import Data.Argonaut.Combinators
+import Data.Argonaut.Combinators ((~>), (:=))
+import Data.Argonaut.Core (jsonEmptyObject)
 
-import Test.Spec
-import Test.Spec.Assertions
-import Test.Spec.Reporter.Console
-import Test.Spec.Runner
+import Test.Spec (it, describe)
+import Test.Spec.Assertions (shouldEqual)
+import Test.Spec.Reporter.Console (consoleReporter)
+import Test.Spec.Runner (Process, run)
 
-import Electron
-import Electron.BrowserWindow
-import Electron.Options
+import Electron (ELECTRON)
+import Electron.BrowserWindow (BrowserWindowOption(WebPreferences, Height, Width), WebPreference(OverlayScrollbars))
+import Electron.Options (encodeOptions)
 
 main :: forall eff. Eff (console :: CONSOLE, process :: Process, electron :: ELECTRON | eff) Unit
 main = run [consoleReporter] do
