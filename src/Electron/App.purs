@@ -3,6 +3,7 @@ module Electron.App
   , getPath
   , Path(..)
   , onReady
+  , onAllWindowsClosed
   , quit
   ) where
 
@@ -26,5 +27,9 @@ data Path
 -- |
 -- | [Official Electron documentation](http://electron.atom.io/docs/all/#event-39-ready-39)
 foreign import onReady :: forall eff
+   . Eff (electron :: ELECTRON | eff) Unit
+  -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import onAllWindowsClosed :: forall eff
    . Eff (electron :: ELECTRON | eff) Unit
   -> Eff (electron :: ELECTRON | eff) Unit
