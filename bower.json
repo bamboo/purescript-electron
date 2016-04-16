@@ -29,5 +29,5 @@
     "purescript-console": "^0.1.1",
     "purescript-spec": "^0.7.4"
   },
-  "version": "0.2.0"
+  "version": "0.2.1"
 }
