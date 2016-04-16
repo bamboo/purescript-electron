@@ -16,16 +16,13 @@ module Electron.BrowserWindow
   , onNewWindow
   ) where
 
-import Prelude
-
-import Control.Monad.Eff
-
+import Prelude (Unit, (>>>))
+import Control.Monad.Eff (Eff)
 import Data.Argonaut.Core (Json())
-import Data.Generic
-
-import Electron
-import Electron.Options
-import Electron.Event
+import Data.Generic (class Generic)
+import Electron (ELECTRON)
+import Electron.Options (encodeOptions)
+import Electron.Event (Event)
 
 data BrowserWindowOption
   = Width Int

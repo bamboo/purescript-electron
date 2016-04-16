@@ -2,14 +2,13 @@ module Electron.Options
   ( encodeOptions
   ) where
 
-import Prelude
-
-import Data.Argonaut.Core
-import Data.Argonaut.Encode
-import Data.Foldable
-import Data.Generic
-import Data.Maybe
-import Data.String
+import Prelude ((+), (++), (>>>), unit, (#), map)
+import Data.Argonaut.Core (Json)
+import Data.Argonaut.Encode (encodeJson, gEncodeJson')
+import Data.Foldable (foldl)
+import Data.Generic (class Generic, GenericSpine(SArray, SProd), toSpine)
+import Data.Maybe (Maybe(Just))
+import Data.String (drop, lastIndexOf, take, toLower)
 import Data.StrMap as M
 
 encodeOptions :: forall a. (Generic a) => Array a -> Json

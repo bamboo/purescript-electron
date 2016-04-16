@@ -8,7 +8,6 @@ module Electron.App
   ) where
 
 import Prelude (Unit)
-
 import Control.Monad.Eff (Eff)
 import Electron (ELECTRON)
 
