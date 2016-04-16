@@ -21,13 +21,13 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-eff": "^0.1.0",
+    "purescript-eff": "^0.1.2",
     "purescript-generics": "^0.7.2",
-    "purescript-argonaut-codecs": "^0.5.2"
+    "purescript-argonaut-codecs": "^0.6.1"
   },
   "devDependencies": {
     "purescript-console": "^0.1.1",
-    "purescript-spec": "^0.7.2"
+    "purescript-spec": "^0.7.4"
   },
   "version": "0.2.0"
 }
