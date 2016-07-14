@@ -73,3 +73,13 @@ exports.onNewWindow = function(webContents) {
     };
   };
 }
+
+exports.onWillNavigate = function(webContents) {
+  return function(callback) {
+    return function() {
+      return webContents.on('will-navigate', function(e, url) {
+        callback(e)(url)();
+      });
+    };
+  };
+}
