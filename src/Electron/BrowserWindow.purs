@@ -14,6 +14,7 @@ module Electron.BrowserWindow
   , send
   , onDidFinishLoad
   , onNewWindow
+  , onWillNavigate
   ) where
 
 import Prelude (Unit, (>>>))
@@ -101,6 +102,11 @@ foreign import onDidFinishLoad :: forall eff
   -> Eff (electron :: ELECTRON | eff) Unit
 
 foreign import onNewWindow :: forall eff
+   . WebContents
+  -> (Event -> String -> Eff (electron :: ELECTRON | eff) Unit)
+  -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import onWillNavigate :: forall eff
    . WebContents
   -> (Event -> String -> Eff (electron :: ELECTRON | eff) Unit)
   -> Eff (electron :: ELECTRON | eff) Unit
